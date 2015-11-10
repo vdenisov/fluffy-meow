@@ -12,7 +12,7 @@ import org.vaadin.addons.guice.ui.ScopedUI;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Theme("classifier")
+@Theme("fluffy-meow")
 public class FluffyUI extends ScopedUI {
     private static final Logger log = LogManager.getLogger(FluffyUI.class);
 
@@ -33,7 +33,7 @@ public class FluffyUI extends ScopedUI {
 
     @Override
     protected void init(VaadinRequest request) {
-        getPage().setTitle("Tweet Classifier");
+        getPage().setTitle("Fluffy Meow");
         createTestLayout();
     }
 
