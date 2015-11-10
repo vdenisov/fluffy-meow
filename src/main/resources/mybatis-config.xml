@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- Extra properties to be set on a per-application basis -->
+  <!-- Make sure there's only one properies file per application to avoid conflicts! -->
+  <properties>
+    <property name="jdbc.url" value="" />
+    <property name="jdbc.username" value="" />
+    <property name="jdbc.password" value="" />
+    <property name="jdbc.pool.minConnections" value="1" />
+    <property name="jdbc.pool.maxConnections" value="10" />
+    <!-- Add more properties as required -->
+  </properties>
+  
+  <settings>
+    <setting name="logImpl" value="LOG4J2"/>
+  </settings>
+
+  <typeAliases>
+    <package name="org.plukh.fluffymeow.dao.entities" />
+  </typeAliases>
+
+  <typeHandlers>
+    <package name="org.plukh.fluffymeow.dao.typehandlers" />
+  </typeHandlers>
+
+  <environments default="production">
+    <environment id="production">
+      <transactionManager type="JDBC" />
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="defaultTransactionIsolationLevel" value="2" /> <!-- READ_COMMITTED -->
+        <property name="poolMaximumActiveConnections" value="${jdbc.pool.maxConnections}" />
+        <property name="poolMaximumIdleConnections" value="${jdbc.pool.minConnections}" />
+        <property name="poolMaximumCheckoutTime" value="7200000" /> <!-- 2 hours -->
+        <property name="poolPingQuery" value="/* ping */ select 1" />
+        <property name="poolPingEnabled" value="true" />
+        <property name="poolPingConnectionsNotUsedFor" value="600000" />
+      </dataSource>
+    </environment>
+
+    <environment id="test">
+      <transactionManager type="JDBC" />
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://mysql.local:3306/fluffy-meow" />
+        <property name="username" value="fluffy-meow" />
+        <property name="password" value="aaaabbbb" />
+        <property name="defaultTransactionIsolationLevel" value="2" /> <!-- READ_COMMITTED -->
+        <property name="poolMaximumActiveConnections" value="10" />
+        <property name="poolMaximumIdleConnections" value="3" />
+        <property name="poolMaximumCheckoutTime" value="7200000" /> <!-- 2 hours -->
+        <property name="poolPingQuery" value="/* ping */ select 1" />
+        <property name="poolPingEnabled" value="true" />
+        <property name="poolPingConnectionsNotUsedFor" value="600000" />
+      </dataSource>
+    </environment>
+  </environments>
+
+  <mappers>
+    <package name="org.plukh.fluffymeow.dao.mappers" />
+  </mappers>
+</configuration>

@@ -1,0 +1,7 @@
+@import "../valo/valo.scss";
+@import "addons.scss";
+
+@mixin fluffy-meow {
+  @include valo;
+  @include addons;
+}
