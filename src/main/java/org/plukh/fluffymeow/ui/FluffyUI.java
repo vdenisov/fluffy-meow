@@ -1,6 +1,7 @@
 package org.plukh.fluffymeow.ui;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
@@ -16,56 +17,18 @@ import javax.inject.Named;
 public class FluffyUI extends ScopedUI {
     private static final Logger log = LogManager.getLogger(FluffyUI.class);
 
-    private transient FluffyDAO dao;
-    private Test uiScopedValue;
-    private Test sessionScopedValue;
-
-    private Label sessionScopedValueLabel;
-    private Label uiScopedValueLabel;
+    private final transient FluffyDAO dao;
+    private final Navigator navigator;
 
     @Inject
-    public FluffyUI(FluffyDAO dao, @Named("uiScoped") Test uiScopedValue, @Named("sessionScoped") Test
-            sessionScopedValue) {
+    public FluffyUI(FluffyDAO dao, Navigator navigator) {
         this.dao = dao;
-        this.uiScopedValue = uiScopedValue;
-        this.sessionScopedValue = sessionScopedValue;
+        this.navigator = navigator;
     }
 
     @Override
     protected void init(VaadinRequest request) {
-        getPage().setTitle("Fluffy Meow");
-        createTestLayout();
+
     }
 
-    private void createTestLayout() {
-        log.debug("Creating Test Layout");
-
-        VerticalLayout layout = new VerticalLayout();
-        layout.setMargin(true);
-
-        sessionScopedValueLabel = new Label();
-        uiScopedValueLabel = new Label();
-        updateLabels();
-
-        layout.addComponent(sessionScopedValueLabel);
-        layout.addComponent(uiScopedValueLabel);
-
-        layout.addComponent(new Button("Increment values", event -> {
-            sessionScopedValue.setValue(sessionScopedValue.getValue() + 1);
-            uiScopedValue.setValue(uiScopedValue.getValue() + 1);
-            updateLabels();
-        }));
-        layout.addComponent(new Button("Refresh values", event -> {
-            updateLabels();
-        }));
-
-        setContent(layout);
-
-        log.debug("Test Layout created");
-    }
-
-    private void updateLabels() {
-        sessionScopedValueLabel.setValue("Session: " + sessionScopedValue.getValue());
-        uiScopedValueLabel.setValue("UI: " + uiScopedValue.getValue());
-    }
 }

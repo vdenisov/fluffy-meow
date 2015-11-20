@@ -1,18 +1,28 @@
 package org.plukh.fluffymeow.guice;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.name.Names;
-import com.google.inject.servlet.ServletScopes;
-import org.plukh.fluffymeow.Test;
+import com.google.inject.multibindings.MapBinder;
+import com.vaadin.navigator.View;
 import org.plukh.fluffymeow.dao.FluffyDAO;
 import org.plukh.fluffymeow.dao.MyBatisFluffyDAOImpl;
-import org.vaadin.addons.guice.uiscope.UIScope;
+import org.plukh.fluffymeow.ui.MainView;
+import org.plukh.fluffymeow.ui.user.UserAccountView;
+import org.plukh.fluffymeow.ui.user.UserRegistrationView;
+import org.vaadin.addons.guice.uiscope.UIScoped;
 
 public class FluffyModule extends AbstractModule {
+    protected MapBinder<String, View> mapbinder;
+
     @Override
     protected void configure() {
         bind(FluffyDAO.class).to(MyBatisFluffyDAOImpl.class);
-        bind(Test.class).annotatedWith(Names.named("uiScoped")).to(Test.class).in(UIScope.getCurrent());
-        bind(Test.class).annotatedWith(Names.named("sessionScoped")).to(Test.class).in(ServletScopes.SESSION);
+
+        addBinding("account", UserAccountView.class);
+        addBinding("registration", UserRegistrationView.class);
+        addBinding("main", MainView.class);
+    }
+
+    protected void addBinding(String uriFragment, Class<? extends View> clazz) {
+        mapbinder.addBinding(uriFragment).to(clazz).in(UIScoped.class);
     }
 }
