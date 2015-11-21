@@ -4,7 +4,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Link;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 import org.plukh.fluffymeow.ui.user.UserAccountView;
 import org.plukh.fluffymeow.ui.user.UserRegistrationView;
@@ -12,11 +12,12 @@ import org.plukh.fluffymeow.ui.user.UserRegistrationView;
 public class Footer extends HorizontalLayout {
     private final Navigator navigator;
 
-    public Footer(Navigator navigator) {
-        this.navigator = navigator;
+    public Footer() {
+        this.navigator = UI.getCurrent().getNavigator();
 
-        setHeight("0%");
         setWidth("100%");
+        setSpacing(true);
+        setMargin(true);
 
         addComponent(new Label("Footer will be here"));
 

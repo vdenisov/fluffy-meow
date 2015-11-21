@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class GuicedViewProvider implements ViewProvider {
-    private static final String DEFAULT_VIEW_NAME = "main";
+    private static final String DEFAULT_VIEW_NAME = "";
 
     private Map<String, Provider<View>> viewMapping;
     private Set<String> keys;

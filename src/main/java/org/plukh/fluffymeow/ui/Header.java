@@ -4,17 +4,19 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
 import org.plukh.fluffymeow.ui.user.UserAccountView;
 import org.plukh.fluffymeow.ui.user.UserRegistrationView;
 
 public class Header extends HorizontalLayout {
     private final Navigator navigator;
 
-    public Header(Navigator navigator) {
-        this.navigator = navigator;
+    public Header() {
+        this.navigator = UI.getCurrent().getNavigator();
 
-        setHeight("0%");
         setWidth("100%");
+        //setSpacing(true);
+        setMargin(true);
 
         addComponent(new Label("Header will be here"));
         addComponent(new Button("To Main View", event -> navigator.navigateTo("")));

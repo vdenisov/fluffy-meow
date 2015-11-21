@@ -19,5 +19,7 @@
 /src/main/webapp/VAADIN/themes/fluffy-meow/addons.scss
 /src/main/webapp/VAADIN/themes/fluffy-meow/styles.css
 
-## Valo theme (should be updated with each Vaadin release)
+
+## Base themes (should be updated with each Vaadin release)
+/src/main/webapp/VAADIN/themes/base
 /src/main/webapp/VAADIN/themes/valo

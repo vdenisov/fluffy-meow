@@ -13,6 +13,7 @@ public class UserAccountView extends VerticalLayout implements View {
         setSizeFull();
 
         Label label = new Label("Account View will be here");
+        label.setSizeUndefined();
         addComponent(label);
         setComponentAlignment(label, Alignment.MIDDLE_CENTER);
     }
