@@ -6,12 +6,11 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.plukh.fluffymeow.Test;
 import org.plukh.fluffymeow.dao.FluffyDAO;
+import org.plukh.fluffymeow.guice.GuicedViewProvider;
 import org.vaadin.addons.guice.ui.ScopedUI;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 @Theme("fluffy-meow")
 public class FluffyUI extends ScopedUI {
@@ -20,15 +19,33 @@ public class FluffyUI extends ScopedUI {
     private final transient FluffyDAO dao;
     private final Navigator navigator;
 
+    private final Panel navigableContent;
+
     @Inject
-    public FluffyUI(FluffyDAO dao, Navigator navigator) {
+    public FluffyUI(FluffyDAO dao, GuicedViewProvider viewProvider) {
         this.dao = dao;
-        this.navigator = navigator;
+        navigableContent = new Panel();
+        navigator = new Navigator(this, navigableContent);
+        navigator.addProvider(viewProvider);
     }
 
     @Override
     protected void init(VaadinRequest request) {
+        //Create and set root layout
+        VerticalLayout root = new VerticalLayout();
+        root.setSizeFull();
+        setContent(root);
 
+        //Create and add header
+        Component header = new Header(navigator);
+        root.addComponent(header);
+
+        //Add navigable part
+        navigableContent.setSizeFull();
+        root.addComponent(navigableContent);
+
+        //Create and add footer
+        Component footer = new Footer(navigator);
+        root.addComponent(footer);
     }
-
 }

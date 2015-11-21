@@ -17,9 +17,12 @@ public class FluffyModule extends AbstractModule {
     protected void configure() {
         bind(FluffyDAO.class).to(MyBatisFluffyDAOImpl.class);
 
-        addBinding("account", UserAccountView.class);
-        addBinding("registration", UserRegistrationView.class);
-        addBinding("main", MainView.class);
+        //View/Navigator bindings
+        mapbinder = MapBinder.newMapBinder(binder(), String.class, View.class);
+
+        addBinding(UserAccountView.VIEW_NAME, UserAccountView.class);
+        addBinding(UserRegistrationView.VIEW_NAME, UserRegistrationView.class);
+        addBinding(MainView.VIEW_NAME, MainView.class);
     }
 
     protected void addBinding(String uriFragment, Class<? extends View> clazz) {
