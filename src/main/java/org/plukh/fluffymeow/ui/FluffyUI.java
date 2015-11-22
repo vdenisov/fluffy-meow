@@ -22,6 +22,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HasComponents;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import org.apache.logging.log4j.LogManager;
@@ -29,8 +30,10 @@ import org.apache.logging.log4j.Logger;
 import org.plukh.fluffymeow.dao.FluffyDAO;
 import org.plukh.fluffymeow.guice.GuicedViewProvider;
 import org.vaadin.addons.guice.ui.ScopedUI;
+import org.vaadin.webinar.i18n.Translatable;
 
 import javax.inject.Inject;
+import java.util.Locale;
 
 @Theme("fluffy-meow")
 public class FluffyUI extends ScopedUI {
@@ -67,5 +70,23 @@ public class FluffyUI extends ScopedUI {
         //Create and add footer
         Component footer = new Footer();
         root.addComponent(footer);
+
+        //Set locale as the last init action, after all components/views have been created
+        setLocale(getPage().getWebBrowser().getLocale());
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        super.setLocale(locale);
+        updateMessageStrings(getContent());
+    }
+
+    private void updateMessageStrings(Component component) {
+        if (component instanceof Translatable) {
+            ((Translatable) component).updateMessageStrings();
+        }
+        if (component instanceof HasComponents) {
+            ((HasComponents) component).iterator().forEachRemaining(this::updateMessageStrings);
+        }
     }
 }

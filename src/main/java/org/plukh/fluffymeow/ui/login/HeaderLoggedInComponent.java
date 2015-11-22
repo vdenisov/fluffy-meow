@@ -18,5 +18,12 @@
 
 package org.plukh.fluffymeow.ui.login;
 
-public class HeaderLoggedInComponent {
+import com.vaadin.ui.CustomComponent;
+import org.vaadin.webinar.i18n.Translatable;
+
+public class HeaderLoggedInComponent extends CustomComponent implements Translatable {
+    @Override
+    public void updateMessageStrings() {
+
+    }
 }

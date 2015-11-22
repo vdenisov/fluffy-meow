@@ -24,6 +24,10 @@ $v-layout-margin-left   : 12px;
 @import "../valo/valo.scss";
 @import "addons.scss";
 
+.v-image-pointer {
+  cursor: pointer;
+}
+
 @mixin fluffy-meow {
   @include valo;
   @include addons;

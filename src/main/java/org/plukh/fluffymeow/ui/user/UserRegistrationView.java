@@ -23,8 +23,9 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import org.vaadin.webinar.i18n.Translatable;
 
-public class UserRegistrationView extends VerticalLayout implements View {
+public class UserRegistrationView extends VerticalLayout implements View, Translatable {
     public static final String VIEW_NAME = "register";
 
     public UserRegistrationView() {
@@ -38,6 +39,11 @@ public class UserRegistrationView extends VerticalLayout implements View {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
+
+    }
+
+    @Override
+    public void updateMessageStrings() {
 
     }
 }

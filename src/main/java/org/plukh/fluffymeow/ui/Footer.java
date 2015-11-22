@@ -26,8 +26,9 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 import org.plukh.fluffymeow.ui.user.UserAccountView;
 import org.plukh.fluffymeow.ui.user.UserRegistrationView;
+import org.vaadin.webinar.i18n.Translatable;
 
-public class Footer extends HorizontalLayout {
+public class Footer extends HorizontalLayout implements Translatable {
     private final Navigator navigator;
 
     public Footer() {
@@ -50,5 +51,10 @@ public class Footer extends HorizontalLayout {
         addComponent(mainViewButton);
         addComponent(accountViewButton);
         addComponent(registrationViewButton);
+    }
+
+    @Override
+    public void updateMessageStrings() {
+
     }
 }

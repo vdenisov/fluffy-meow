@@ -16,14 +16,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.plukh.fluffymeow.ui.login;
+package org.plukh.fluffymeow.ui.i18n;
 
 import com.vaadin.ui.CustomComponent;
-import org.vaadin.webinar.i18n.Translatable;
 
-public class HeaderLoginComponent extends CustomComponent implements Translatable {
-    @Override
-    public void updateMessageStrings() {
-
-    }
+public class LocaleChooserComponent extends CustomComponent {
 }

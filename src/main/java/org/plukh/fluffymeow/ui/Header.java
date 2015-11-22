@@ -18,27 +18,48 @@
 
 package org.plukh.fluffymeow.ui;
 
+import com.vaadin.event.MouseEvents;
 import com.vaadin.navigator.Navigator;
-import com.vaadin.ui.Button;
+import com.vaadin.server.Resource;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.UI;
-import org.plukh.fluffymeow.ui.user.UserAccountView;
-import org.plukh.fluffymeow.ui.user.UserRegistrationView;
+import org.plukh.fluffymeow.ui.i18n.LocaleChooserComponent;
+import org.vaadin.webinar.i18n.Messages;
+import org.vaadin.webinar.i18n.Translatable;
 
-public class Header extends HorizontalLayout {
+public class Header extends HorizontalLayout implements Translatable {
     private final Navigator navigator;
+
+    private Image logoImage;
+    private Component loginComponent;
+    private LocaleChooserComponent localeChooser;
 
     public Header() {
         this.navigator = UI.getCurrent().getNavigator();
 
         setWidth("100%");
-        //setSpacing(true);
         setMargin(true);
 
-        addComponent(new Label("Header will be here"));
-        addComponent(new Button("To Main View", event -> navigator.navigateTo("")));
-        addComponent(new Button("To Account View", event -> navigator.navigateTo(UserAccountView.VIEW_NAME)));
-        addComponent(new Button("To Registration View", event -> navigator.navigateTo(UserRegistrationView.VIEW_NAME)));
+        Resource resource = new ThemeResource("logo.png");
+        logoImage = new Image(null, resource);
+        logoImage.addStyleName("pointer");
+        logoImage.addClickListener(this::onLogoImageClick);
+
+        addComponent(logoImage);
+    }
+
+    private void onLogoImageClick(MouseEvents.ClickEvent event) {
+
+
+    }
+
+    @Override
+    public void updateMessageStrings() {
+        Messages messages = Messages.getInstance();
+
+        logoImage.setAlternateText(messages.getMessage("header.logo.alternatetext"));
     }
 }
