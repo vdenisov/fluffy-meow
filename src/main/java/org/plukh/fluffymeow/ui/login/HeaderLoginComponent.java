@@ -16,8 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import "fluffy-meow";
+package org.plukh.fluffymeow.ui.login;
 
-.fluffy-meow {
-  @include fluffy-meow;
+public class HeaderLoginComponent {
 }
