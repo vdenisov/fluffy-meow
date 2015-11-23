@@ -31,6 +31,6 @@ public class GuiceContextListener extends GuiceServletContextListener {
     @Override
     protected Injector getInjector() {
         return Guice.createInjector(new UIScopeModule(FluffyUI.class), new GuiceServletModule(),
-                new FluffyModule());
+                new FluffyModule(), new EventBusModule());
     }
 }

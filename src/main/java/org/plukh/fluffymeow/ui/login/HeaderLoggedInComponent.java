@@ -18,12 +18,72 @@
 
 package org.plukh.fluffymeow.ui.login;
 
-import com.vaadin.ui.CustomComponent;
+import com.google.common.eventbus.EventBus;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.plukh.fluffymeow.ui.user.UserAccountView;
+import org.vaadin.webinar.i18n.Messages;
 import org.vaadin.webinar.i18n.Translatable;
 
+import javax.inject.Inject;
+
 public class HeaderLoggedInComponent extends CustomComponent implements Translatable {
+    private static final Logger log = LogManager.getLogger(HeaderLoggedInComponent.class);
+
+    protected final Label loggedInLabel;
+    protected final Button logoutButton;
+    protected final Button manageAccountButton;
+
+    protected transient final EventBus eventBus;
+
+    @Inject
+    public HeaderLoggedInComponent(EventBus eventBus) {
+        log.trace("Creating HeaderLoggedInComponent...");
+
+        this.eventBus = eventBus;
+
+        HorizontalLayout layout = new HorizontalLayout();
+
+        layout.setSpacing(true);
+
+        loggedInLabel = new Label();
+        loggedInLabel.setContentMode(ContentMode.HTML);
+
+        logoutButton = new Button();
+        logoutButton.addStyleName(ValoTheme.BUTTON_LINK);
+        logoutButton.addClickListener(this::onLogout);
+
+        manageAccountButton = new Button();
+        manageAccountButton.addStyleName(ValoTheme.BUTTON_LINK);
+        manageAccountButton.addClickListener(this::onManageAccount);
+
+        layout.addComponent(loggedInLabel);
+        layout.addComponent(manageAccountButton);
+        layout.addComponent(logoutButton);
+
+        setCompositionRoot(layout);
+
+        log.debug("Created HeaderLoggedInComponent");
+    }
+
+    private void onLogout(Button.ClickEvent clickEvent) {
+        //TODO: proper logout action should be implemented here
+        eventBus.post(new LogoutEventImpl());
+    }
+
+    private void onManageAccount(Button.ClickEvent clickEvent) {
+        UI.getCurrent().getNavigator().navigateTo(UserAccountView.VIEW_NAME);
+    }
+
     @Override
     public void updateMessageStrings() {
+        Messages messages = Messages.getInstance();
 
+        loggedInLabel.setCaption(messages.getMessage("header.loggedin.loggedinas", "Plukh"));
+        logoutButton.setCaption(messages.getMessage("header.loggedin.logoutlink"));
+        manageAccountButton.setCaption(messages.getMessage("header.loggedin.account"));
     }
 }

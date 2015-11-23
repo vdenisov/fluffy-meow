@@ -21,7 +21,15 @@ package org.plukh.fluffymeow.ui.login;
 import com.vaadin.ui.CustomComponent;
 import org.vaadin.webinar.i18n.Translatable;
 
+import javax.inject.Inject;
+
 public class HeaderLoginComponent extends CustomComponent implements Translatable {
+
+    @Inject
+    public HeaderLoginComponent() {
+
+    }
+
     @Override
     public void updateMessageStrings() {
 

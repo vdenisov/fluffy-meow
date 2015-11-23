@@ -18,27 +18,26 @@
 
 package org.plukh.fluffymeow.ui;
 
+import com.google.inject.Inject;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.*;
 import org.plukh.fluffymeow.ui.i18n.LocaleChooserComponent;
+import org.plukh.fluffymeow.ui.login.HeaderLoginComponent;
 import org.vaadin.webinar.i18n.Messages;
 import org.vaadin.webinar.i18n.Translatable;
 
 public class Header extends HorizontalLayout implements Translatable {
-    private final Navigator navigator;
-
     private Image logoImage;
-    private Component loginComponent;
+    private HeaderLoginComponent loginComponent;
     private LocaleChooserComponent localeChooser;
 
-    public Header() {
-        this.navigator = UI.getCurrent().getNavigator();
+    @Inject
+    public Header(HeaderLoginComponent loginComponent, LocaleChooserComponent localeChooser) {
+        this.loginComponent = loginComponent;
+        this.localeChooser = localeChooser;
 
         setWidth("100%");
         setMargin(true);
@@ -49,11 +48,15 @@ public class Header extends HorizontalLayout implements Translatable {
         logoImage.addClickListener(this::onLogoImageClick);
 
         addComponent(logoImage);
+        addComponent(loginComponent);
+        addComponent(localeChooser);
+
+        setExpandRatio(loginComponent, 1.0f);
+        setComponentAlignment(loginComponent, Alignment.BOTTOM_LEFT);
     }
 
     private void onLogoImageClick(MouseEvents.ClickEvent event) {
-
-
+        UI.getCurrent().getNavigator().navigateTo(MainView.VIEW_NAME);
     }
 
     @Override

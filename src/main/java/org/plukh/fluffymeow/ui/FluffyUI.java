@@ -18,6 +18,7 @@
 
 package org.plukh.fluffymeow.ui;
 
+import com.google.inject.Injector;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
@@ -42,9 +43,13 @@ public class FluffyUI extends ScopedUI {
     private final transient FluffyDAO dao;
     private final Panel navigableContent;
 
+    private final Injector injector;
+
     @Inject
-    public FluffyUI(FluffyDAO dao, GuicedViewProvider viewProvider) {
+    public FluffyUI(FluffyDAO dao, GuicedViewProvider viewProvider, Injector injector) {
         this.dao = dao;
+        this.injector = injector;
+
         this.navigableContent = new Panel();
 
         Navigator navigator = new Navigator(this, navigableContent);
@@ -59,7 +64,7 @@ public class FluffyUI extends ScopedUI {
         setContent(root);
 
         //Create and add header
-        Component header = new Header();
+        Header header = injector.getInstance(Header.class);
         root.addComponent(header);
 
         //Add navigable part
@@ -68,7 +73,7 @@ public class FluffyUI extends ScopedUI {
         root.setExpandRatio(navigableContent, 1.0f);
 
         //Create and add footer
-        Component footer = new Footer();
+        Footer footer = injector.getInstance(Footer.class);
         root.addComponent(footer);
 
         //Set locale as the last init action, after all components/views have been created
