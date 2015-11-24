@@ -23,18 +23,26 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.vaadin.webinar.i18n.Translatable;
 
 public class UserRegistrationView extends VerticalLayout implements View, Translatable {
+    private static final Logger log = LogManager.getLogger(UserRegistrationView.class);
+
     public static final String VIEW_NAME = "register";
 
     public UserRegistrationView() {
+        log.trace("Creating user registration view...");
+
         setSizeFull();
 
         Label label = new Label("Registration View will be here");
         label.setSizeUndefined();
         addComponent(label);
         setComponentAlignment(label, Alignment.MIDDLE_CENTER);
+
+        log.debug("User registration view created");
     }
 
     @Override

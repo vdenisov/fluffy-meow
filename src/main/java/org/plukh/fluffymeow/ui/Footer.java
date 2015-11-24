@@ -24,14 +24,23 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.plukh.fluffymeow.ui.user.UserAccountView;
 import org.plukh.fluffymeow.ui.user.UserRegistrationView;
 import org.vaadin.webinar.i18n.Translatable;
 
+import javax.inject.Inject;
+
 public class Footer extends HorizontalLayout implements Translatable {
+    private static final Logger log = LogManager.getLogger(Footer.class);
+
     private final Navigator navigator;
 
+    @Inject
     public Footer() {
+        log.trace("Creating Footer...");
+
         this.navigator = UI.getCurrent().getNavigator();
 
         setWidth("100%");
@@ -51,6 +60,8 @@ public class Footer extends HorizontalLayout implements Translatable {
         addComponent(mainViewButton);
         addComponent(accountViewButton);
         addComponent(registrationViewButton);
+
+        log.debug("Footer created");
     }
 
     @Override

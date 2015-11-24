@@ -20,27 +20,33 @@ package org.plukh.fluffymeow.ui;
 
 import com.google.inject.Inject;
 import com.vaadin.event.MouseEvents;
-import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.plukh.fluffymeow.ui.i18n.LocaleChooserComponent;
-import org.plukh.fluffymeow.ui.login.HeaderLoginComponent;
+import org.plukh.fluffymeow.ui.login.HeaderUserComponent;
 import org.vaadin.webinar.i18n.Messages;
 import org.vaadin.webinar.i18n.Translatable;
 
 public class Header extends HorizontalLayout implements Translatable {
+    private static final Logger log = LogManager.getLogger(Header.class);
+
     private Image logoImage;
-    private HeaderLoginComponent loginComponent;
+    private HeaderUserComponent loginComponent;
     private LocaleChooserComponent localeChooser;
 
     @Inject
-    public Header(HeaderLoginComponent loginComponent, LocaleChooserComponent localeChooser) {
+    public Header(HeaderUserComponent loginComponent, LocaleChooserComponent localeChooser) {
+        log.trace("Creating Header...");
+
         this.loginComponent = loginComponent;
         this.localeChooser = localeChooser;
 
         setWidth("100%");
         setMargin(true);
+        setSpacing(true);
 
         Resource resource = new ThemeResource("logo.png");
         logoImage = new Image(null, resource);
@@ -53,6 +59,9 @@ public class Header extends HorizontalLayout implements Translatable {
 
         setExpandRatio(loginComponent, 1.0f);
         setComponentAlignment(loginComponent, Alignment.BOTTOM_LEFT);
+        setComponentAlignment(localeChooser, Alignment.BOTTOM_RIGHT);
+
+        log.debug("Header created");
     }
 
     private void onLogoImageClick(MouseEvents.ClickEvent event) {

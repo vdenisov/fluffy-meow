@@ -43,7 +43,7 @@ public class FluffyUI extends ScopedUI {
     private final transient FluffyDAO dao;
     private final Panel navigableContent;
 
-    private final Injector injector;
+    private transient final Injector injector;
 
     @Inject
     public FluffyUI(FluffyDAO dao, GuicedViewProvider viewProvider, Injector injector) {

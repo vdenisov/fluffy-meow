@@ -17,7 +17,7 @@ public class EventBusModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        log.trace("Creating EventBus module...");
+        log.trace("Creating EventBusModule...");
 
         bind(EventBus.class).toInstance(eventBus);
         bindListener(Matchers.any(), new TypeListener() {
@@ -26,5 +26,5 @@ public class EventBusModule extends AbstractModule {
             }
         });
 
-        log.debug("EventBus module created");
+        log.debug("EventBusModule created");
     }}

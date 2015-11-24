@@ -23,18 +23,26 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.vaadin.webinar.i18n.Translatable;
 
 public class UserAccountView extends VerticalLayout implements View, Translatable {
+    private static final Logger log = LogManager.getLogger(UserAccountView.class);
+
     public static final String VIEW_NAME = "account";
 
     public UserAccountView() {
+        log.trace("Creating user account view...");
+
         setSizeFull();
 
         Label label = new Label("Account View will be here");
         label.setSizeUndefined();
         addComponent(label);
         setComponentAlignment(label, Alignment.MIDDLE_CENTER);
+
+        log.debug("User account view created");
     }
 
     @Override

@@ -32,7 +32,7 @@
     <log4j2.version>2.3</log4j2.version>
     <guice.version>4.0</guice.version>
     <mybatis.version>3.3.0</mybatis.version>
-    <vaadin.version>7.5.5</vaadin.version>
+    <vaadin.version>7.5.9</vaadin.version>
     <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
   </properties>
 

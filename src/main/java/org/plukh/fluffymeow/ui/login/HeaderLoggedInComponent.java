@@ -45,12 +45,14 @@ public class HeaderLoggedInComponent extends CustomComponent implements Translat
 
         this.eventBus = eventBus;
 
-        HorizontalLayout layout = new HorizontalLayout();
+        setWidth("100%");
 
+        HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(true);
 
         loggedInLabel = new Label();
         loggedInLabel.setContentMode(ContentMode.HTML);
+        loggedInLabel.setSizeUndefined();
 
         logoutButton = new Button();
         logoutButton.addStyleName(ValoTheme.BUTTON_LINK);
@@ -63,6 +65,8 @@ public class HeaderLoggedInComponent extends CustomComponent implements Translat
         layout.addComponent(loggedInLabel);
         layout.addComponent(manageAccountButton);
         layout.addComponent(logoutButton);
+
+        layout.setComponentAlignment(loggedInLabel, Alignment.MIDDLE_LEFT);
 
         setCompositionRoot(layout);
 
@@ -82,7 +86,7 @@ public class HeaderLoggedInComponent extends CustomComponent implements Translat
     public void updateMessageStrings() {
         Messages messages = Messages.getInstance();
 
-        loggedInLabel.setCaption(messages.getMessage("header.loggedin.loggedinas", "Plukh"));
+        loggedInLabel.setValue(messages.getMessage("header.loggedin.loggedinas", "Plukh"));
         logoutButton.setCaption(messages.getMessage("header.loggedin.logoutlink"));
         manageAccountButton.setCaption(messages.getMessage("header.loggedin.account"));
     }
