@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="My Work" pattern="((file[fluffy-meow]:src/main/resources//*||file[fluffy-meow]:src/main/java/org/plukh//*||file[fluffy-meow]:src/main/webapp//*)&amp;&amp;!file[fluffy-meow]:src/main/webapp/VAADIN/gwt-unitCache//*&amp;&amp;!file[fluffy-meow]:src/main/webapp/VAADIN/widgetsets//*&amp;&amp;!file[fluffy-meow]:src/main/webapp/VAADIN/themes/base//*&amp;&amp;!file[fluffy-meow]:src/main/webapp/VAADIN/themes/valo//*||file:.gitignore||file:pom.xml)&amp;&amp;!file:src/main/webapp/VAADIN/themes/fluffy-meow/addons.scss&amp;&amp;!file:src/main/webapp/VAADIN/themes/fluffy-meow/styles.css" />
+</component>

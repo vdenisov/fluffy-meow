@@ -23,8 +23,7 @@ import com.google.inject.multibindings.MapBinder;
 import com.vaadin.navigator.View;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.plukh.fluffymeow.dao.FluffyDAO;
-import org.plukh.fluffymeow.dao.MyBatisFluffyDAOImpl;
+import org.plukh.fluffymeow.Config;
 import org.plukh.fluffymeow.ui.MainView;
 import org.plukh.fluffymeow.ui.user.UserAccountView;
 import org.plukh.fluffymeow.ui.user.UserRegistrationView;
@@ -32,14 +31,17 @@ import org.vaadin.addons.guice.uiscope.UIScoped;
 
 public class FluffyModule extends AbstractModule {
     private static final Logger log = LogManager.getLogger(FluffyModule.class);
+    private final Config config;
 
     protected MapBinder<String, View> mapbinder;
+
+    public FluffyModule(Config config) {
+        this.config = config;
+    }
 
     @Override
     protected void configure() {
         log.trace("Creating FluffyModule...");
-
-        bind(FluffyDAO.class).to(MyBatisFluffyDAOImpl.class);
 
         //View bindings
         mapbinder = MapBinder.newMapBinder(binder(), String.class, View.class);
@@ -47,6 +49,9 @@ public class FluffyModule extends AbstractModule {
         addBinding(UserAccountView.VIEW_NAME, UserAccountView.class);
         addBinding(UserRegistrationView.VIEW_NAME, UserRegistrationView.class);
         addBinding(MainView.VIEW_NAME, MainView.class);
+
+        //Config binding
+        bind(Config.class).toInstance(config);
 
         log.debug("FluffyModule created");
     }

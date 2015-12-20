@@ -19,18 +19,23 @@
 
 <configuration>
   <appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+       <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%c{1}] %m%n" />
+    </Console>
+
     <RollingFile name="File"
                  fileName="${sys:catalina.home}/logs/fluffy-meow.log"
                  filePattern="${sys:catalina.home}/logs/fluffy-meow.%d{yyyy-MM-dd}.log.gz">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%c{1}] %m%n" />
       <TimeBasedTriggeringPolicy />
-      <DefaultRolloverStrategy max="90"/>
+      <DefaultRolloverStrategy max="5"/>
     </RollingFile>
 
   </appenders>
   <loggers>
-    <logger name="org.plukh.fluffymeow" level="DEBUG" />
-    <root level="INFO">
+    <logger name="org.plukh.fluffymeow" level="TRACE" />
+    <root level="DEBUG">
+      <appender-ref ref="Console" />
       <appender-ref ref="File" />
     </root>
   </loggers>

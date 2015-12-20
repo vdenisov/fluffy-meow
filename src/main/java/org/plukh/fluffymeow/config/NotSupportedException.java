@@ -16,12 +16,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.plukh.fluffymeow.dao;
+package org.plukh.fluffymeow.config;
 
-import org.plukh.fluffymeow.dao.entities.User;
-import org.plukh.fluffymeow.dao.exceptions.UserExistsException;
-
-public interface FluffyDAO {
-    void createUser(User user) throws UserExistsException;
-    User getUserByEmail(String email);
+public class NotSupportedException extends RuntimeException {
+    public NotSupportedException(String message) {
+        super(message);
+    }
 }

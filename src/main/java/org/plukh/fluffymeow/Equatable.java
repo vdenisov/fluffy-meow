@@ -16,12 +16,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.plukh.fluffymeow.dao;
+package org.plukh.fluffymeow;
 
-import org.plukh.fluffymeow.dao.entities.User;
-import org.plukh.fluffymeow.dao.exceptions.UserExistsException;
-
-public interface FluffyDAO {
-    void createUser(User user) throws UserExistsException;
-    User getUserByEmail(String email);
+public interface Equatable {
+    boolean isEqual(Object o);
 }

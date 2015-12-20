@@ -16,12 +16,17 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.plukh.fluffymeow.dao;
+package org.plukh.fluffymeow.aws;
 
-import org.plukh.fluffymeow.dao.entities.User;
-import org.plukh.fluffymeow.dao.exceptions.UserExistsException;
+public class AWSInstanceInfoException extends RuntimeException {
+    public AWSInstanceInfoException() {
+    }
 
-public interface FluffyDAO {
-    void createUser(User user) throws UserExistsException;
-    User getUserByEmail(String email);
+    public AWSInstanceInfoException(String message) {
+        super(message);
+    }
+
+    public AWSInstanceInfoException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

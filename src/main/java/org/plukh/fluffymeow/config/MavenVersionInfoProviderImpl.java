@@ -16,12 +16,15 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.plukh.fluffymeow.dao;
+package org.plukh.fluffymeow.config;
 
-import org.plukh.fluffymeow.dao.entities.User;
-import org.plukh.fluffymeow.dao.exceptions.UserExistsException;
+public class MavenVersionInfoProviderImpl implements VersionInfoProvider {
+    public static final String DEV_VERSION = "DEV";
 
-public interface FluffyDAO {
-    void createUser(User user) throws UserExistsException;
-    User getUserByEmail(String email);
+    @Override
+    public String getVersion() {
+        String version = MavenVersionInfoProviderImpl.class.getPackage().getImplementationVersion();
+        if (version == null) version = DEV_VERSION;
+        return version;
+    }
 }

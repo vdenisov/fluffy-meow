@@ -1,8 +1,17 @@
 ### IDEA project files
 *.iml
 
-## Directory-based project format:
-.idea/
+### Personal workspace
+/.idea/workspace.xml
+
+### IDEA libraries/artifacts
+/.idea/artifacts
+/.idea/libraries
+
+### Data Sources
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/dataSources.ids
 
 ### Build output
 /target

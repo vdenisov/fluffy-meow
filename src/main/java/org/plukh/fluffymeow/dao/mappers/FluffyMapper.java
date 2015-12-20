@@ -18,5 +18,10 @@
 
 package org.plukh.fluffymeow.dao.mappers;
 
+import org.apache.ibatis.annotations.Param;
+import org.plukh.fluffymeow.dao.entities.User;
+
 public interface FluffyMapper {
+    void createUser(@Param("user") User user);
+    User getUserByEmail(@Param("email") String email);
 }

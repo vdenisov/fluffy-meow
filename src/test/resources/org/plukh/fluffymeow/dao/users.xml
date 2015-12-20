@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "/dataset.dtd">
+<dataset>
+  <table name="USERS">
+    <column>USR_ID</column>
+    <column>USR_EMAIL</column>
+    <column>USR_PASSWORD_HASH</column>
+    <column>USR_PASSWORD_SALT</column>
+    <column>USR_REGISTER_DATE</column>
+    <column>USR_LAST_LOGIN_DATE</column>
+
+    <row>
+      <value>1</value>
+      <value>test@test.com</value>
+      <value>AAAA</value>
+      <value>BBBB</value>
+      <value>2015-01-01 00:00:00</value>
+      <value>2015-01-02 00:00:00</value>
+    </row>
+
+  </table>
+</dataset>

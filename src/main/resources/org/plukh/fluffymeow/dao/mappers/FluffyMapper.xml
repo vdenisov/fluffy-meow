@@ -21,4 +21,30 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.plukh.fluffymeow.dao.mappers.FluffyMapper">
+  <resultMap id="User" type="User">
+    <id property="id" column="USR_ID" />
+    <result property="email" column="USR_EMAIL" />
+    <result property="passwordHash" column="USR_PASSWORD_HASH" />
+    <result property="passwordSalt" column="USR_PASSWORD_SALT" />
+    <result property="registerDate" column="USR_REGISTER_DATE" jdbcType="TIMESTAMP"/>
+    <result property="lastLoginDate" column="USR_LAST_LOGIN_DATE" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="createUser" useGeneratedKeys="true" keyProperty="user.id">
+    insert into USERS (USR_EMAIL, USR_PASSWORD_HASH, USR_PASSWORD_SALT, USR_REGISTER_DATE, USR_LAST_LOGIN_DATE) values
+      (#{user.email}, #{user.passwordHash}, #{user.passwordSalt},
+       #{user.registerDate,jdbcType=TIMESTAMP}, #{user.lastLoginDate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <select id="getUser" resultType="User">
+    select
+      USR_ID,
+      USR_EMAIL,
+      USR_PASSWORD_HASH,
+      USR_PASSWORD_SALT,
+      USR_REGISTER_DATE,
+      USR_LAST_LOGIN_DATE
+    from USERS
+    where USR_EMAIL = #{email}
+  </select>
 </mapper>

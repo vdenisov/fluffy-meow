@@ -18,8 +18,139 @@
 
 package org.plukh.fluffymeow.dao.entities;
 
+import com.google.common.base.MoreObjects;
+import org.joda.time.DateTime;
+import org.plukh.fluffymeow.Equatable;
+
 import java.io.Serializable;
+import java.util.Objects;
 
-public class User implements Serializable {
+public class User implements Serializable, Equatable {
+    private static final long serialVersionUID = -6014573696570143836L;
 
+    private long id;
+    private String email;
+    private String passwordHash;
+    private String passwordSalt;
+    private DateTime registerDate;
+    private DateTime lastLoginDate;
+
+    public User() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public DateTime getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(DateTime registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public DateTime getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(DateTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public User withId(final long id) {
+        this.id = id;
+        return this;
+    }
+
+    public User withEmail(final String email) {
+        this.email = email;
+        return this;
+    }
+
+    public User withPasswordHash(final String passwordHash) {
+        this.passwordHash = passwordHash;
+        return this;
+    }
+
+    public User withPasswordSalt(final String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+        return this;
+    }
+
+    public User withRegisterDate(final DateTime registerDate) {
+        this.registerDate = registerDate;
+        return this;
+    }
+
+    public User withLastLoginDate(final DateTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+        return this;
+    }
+
+    @Override
+    public boolean isEqual(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(passwordHash, user.passwordHash) &&
+                Objects.equals(passwordSalt, user.passwordSalt) &&
+                Objects.equals(registerDate, user.registerDate) &&
+                Objects.equals(lastLoginDate, user.lastLoginDate);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("email", email)
+                .add("passwordHash", passwordHash)
+                .add("passwordSalt", passwordSalt)
+                .add("registerDate", registerDate)
+                .add("lastLoginDate", lastLoginDate)
+                .toString();
+    }
 }

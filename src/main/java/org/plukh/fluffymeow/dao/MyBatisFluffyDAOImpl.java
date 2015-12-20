@@ -18,5 +18,40 @@
 
 package org.plukh.fluffymeow.dao;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.plukh.fluffymeow.dao.entities.User;
+import org.plukh.fluffymeow.dao.exceptions.UserExistsException;
+import org.plukh.fluffymeow.dao.mappers.FluffyMapper;
+
+import javax.inject.Inject;
+
 public class MyBatisFluffyDAOImpl implements FluffyDAO {
+    private static final String EMAIL_UNIQUE_INDEX_NAME = "UNIQUE_USR_EMAIL";
+    private final FluffyMapper mapper;
+
+    @Inject
+    public MyBatisFluffyDAOImpl(FluffyMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    @Override
+    public void createUser(User user) throws UserExistsException {
+        try {
+            mapper.createUser(user);
+        } catch (PersistenceException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof MySQLIntegrityConstraintViolationException) {
+                MySQLIntegrityConstraintViolationException cve = (MySQLIntegrityConstraintViolationException) cause;
+                if (StringUtils.contains(cve.getMessage(), EMAIL_UNIQUE_INDEX_NAME)) throw new UserExistsException(user.getEmail());
+            }
+            throw e;
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return mapper.getUserByEmail(email);
+    }
 }
